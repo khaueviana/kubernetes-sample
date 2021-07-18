@@ -139,3 +139,14 @@ test-app-service:
 
   serviceAccount:
     create: false
+
+test-app-job:
+
+  image:
+    repository: kv/my-test-job
+    pullPolicy: IfNotPresent
+    tag: ""
+
+  job:
+    ## Should the job be rescheduled on the same node if it fails, or just stopped
+    restartPolicy: Never

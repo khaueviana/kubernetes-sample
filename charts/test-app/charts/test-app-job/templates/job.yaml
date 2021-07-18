@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "test-app-job.fullname" . }}-{{ .Release.Revision }}
+  labels:
+    {{- include "test-app-job.labels" . | nindent 4 }}
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      labels:
+        {{- include "test-app-job.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["dotnet"]
+        args: ["TestApp.Job.dll", "migrate-database"]
+      restartPolicy: {{ .Values.job.restartPolicy }}

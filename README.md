@@ -14,6 +14,7 @@ https://www.golinuxcloud.com/kubernetes-helm-hooks-examples/
 
 ## Commands
 
+```
 helm install test-kv . --namespace=default --set test-app-api.image.tag="0.1.0" --set test-app-service.image.tag="0.1.0" --set test-app-job.image.tag="0.1.0" --debug --dry-run
 
 helm upgrade --install my-test-app-release . --namespace=default --set test-app-api.image.tag="0.1.0" --set test-app-service.image.tag="0.1.0" --set test-app-job.image.tag="0.1.0" --debug --dry-run
@@ -47,3 +48,4 @@ choco install kubernetes-cli
 docker build -f TestApp.Job.Dockerfile -t kv/my-test-job:0.1.0 .
 
 minikube -p minikube docker-env | Invoke-Expression
+```

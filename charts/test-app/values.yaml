@@ -4,6 +4,10 @@
 
 replicaCount: 1
 
+global:
+  env: 
+    "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true"
+
 image:
   repository: nginx
   pullPolicy: IfNotPresent
@@ -84,6 +88,9 @@ affinity: {}
 test-app-api:
   replicaCount: 1
 
+  env: 
+    "ASPNETCORE_ENVIRONMENT": "Staging"
+
   image:
     repository: kv/my-test-api
     pullPolicy: IfNotPresent
@@ -111,6 +118,9 @@ test-app-api:
 
 test-app-service:
   replicaCount: 1
+
+  env: 
+    "ASPNETCORE_ENVIRONMENT": "Staging"
 
   image:
     repository: kv/my-test-service
